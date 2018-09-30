@@ -9,13 +9,12 @@ public class generat : MonoBehaviour {
     public GameObject[] des;
     public GameObject timerobj;
     public int timekoef;
-    public float ik;
+    public float ik=10;
+    public GameObject ee ;
+    public GameObject timegame2;
     [SerializeField]
+  public bool ils=true;
 
-   public GameObject ee;
-    [SerializeField]
-    public GameObject timegame;
-    public bool ils = true;
    
 
     // Use this for initialization
@@ -28,17 +27,21 @@ public class generat : MonoBehaviour {
 
     void Awake() {
 
-        ils = true;
-    }
-  public  void Start() {
-
         
 
+  
+
+    }
+  public  void Start() {
+       
+
+        timegame2 = GameObject.FindGameObjectWithTag("Time");
+        des = GameObject.FindGameObjectsWithTag("calldes");
         StartCoroutine(StartCountdown());
 
-        des = GameObject.FindGameObjectsWithTag("calldes");
-        timegame = GameObject.FindGameObjectWithTag("Time");
-       
+
+
+
     }
     [SerializeField]
     public int citem = 9;
@@ -46,6 +49,8 @@ public class generat : MonoBehaviour {
     public void Onclick()
         
     {
+      
+
         Debug.Log("hello");
         
 
@@ -54,6 +59,7 @@ public class generat : MonoBehaviour {
         {
             ee = GameObject.FindGameObjectWithTag("loaddont");
             citem = ee.GetComponent<LoaScene>().vally2;
+            ee = null;
             ui = new GameObject[citem];
             string[] a = new string[citem];
             string[] mix = new string[citem];
@@ -119,6 +125,8 @@ public class generat : MonoBehaviour {
 
             ils = false;
         }
+
+
 
     }
     void Shuffle(string[] block)
@@ -206,11 +214,11 @@ public class generat : MonoBehaviour {
             // Debug.Log("Countdown: " + currCountdownValue);
                       
             yield return new WaitForSeconds(1);
-             timegame.GetComponent<Text>().text = currCountdownValue.ToString();
+             timegame2.GetComponent<Text>().text = currCountdownValue.ToString();
             currCountdownValue--;
         }
 
-        timegame.GetComponent<Text>().text = "Move the numbers to the places you remember";
+        timegame2.GetComponent<Text>().text = "Move the numbers to the places you remember";
         foll();
     }
 
